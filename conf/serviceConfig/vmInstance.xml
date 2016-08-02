@@ -81,7 +81,10 @@
         <name>org.zstack.header.vm.APIGetVmBootOrderMsg</name>
     </message>
     <message>
-        <name>org.zstack.header.vm.APIGetVmConsoleAddressMsg</name>
+        <name>org.zstack.header.vm.APIGetVmConsolePasswordMsg</name>
+    </message>
+    <message>
+        <name>org.zstack.header.vm.APISetVmConsolePasswordMsg</name>
     </message>
     <message>
         <name>org.zstack.header.vm.APIDeleteVmHostnameMsg</name>
