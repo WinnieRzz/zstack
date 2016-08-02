@@ -67,6 +67,13 @@ public class TestVmConsolePasswordOnKvm {
         vm = api.rebootVmInstance(vm.getUuid());
         StartVmCmd scmd = config.startVmCmd;
         Assert.assertTrue(scmd.getConsolePassword().contains(consolePassword));
+        vm = api.deleteVmConsolePassword(vm.getUuid(),null);
+        Assert.assertFalse(VmSystemTags.CONSOLE_PASSWORD.hasTag(vm.getUuid()));
+        consolePassword = api.getVmConsolePassword(vm.getUuid(), null);
+        Assert.assertEquals(null,consolePassword);
+        vm = api.rebootVmInstance(vm.getUuid());
+        scmd = config.startVmCmd;
+        Assert.assertTrue(scmd.getConsolePassword()==null);
 
     }
 }

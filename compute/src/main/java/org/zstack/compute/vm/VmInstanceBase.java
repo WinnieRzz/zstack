@@ -2021,6 +2021,9 @@ public class VmInstanceBase extends AbstractVmInstance {
         }else if (msg instanceof APIGetVmBootOrderMsg) {
             handle((APIGetVmBootOrderMsg) msg);
         }
+        else if(msg instanceof APIDeleteVmConsolePasswordMsg){
+            handle((APIDeleteVmConsolePasswordMsg) msg);
+        }
         else if(msg instanceof APIGetVmConsolePasswordMsg){
             handle((APIGetVmConsolePasswordMsg) msg);
         }else if (msg instanceof APIGetVmConsoleAddressMsg) {
@@ -2227,8 +2230,13 @@ public class VmInstanceBase extends AbstractVmInstance {
         }
         evt.setInventory(getSelfInventory());
         bus.publish(evt);
+    }
 
-
+    private void handle(APIDeleteVmConsolePasswordMsg msg){
+        APIDeleteVmConsolePasswordEvent evt = new APIDeleteVmConsolePasswordEvent(msg.getId());
+        VmSystemTags.CONSOLE_PASSWORD.deleteInherentTag(self.getUuid());
+        evt.setInventory(getSelfInventory());
+        bus.publish(evt);
     }
 
     private void recoverVm(final Completion completion) {

@@ -3838,6 +3838,16 @@ public class Api implements CloudBusEventListener {
         return evt.getInventory();
     }
 
+    public VmInstanceInventory deleteVmConsolePassword(String vmUuid,SessionInventory session) throws ApiSenderException{
+        APIDeleteVmConsolePasswordMsg msg = new APIDeleteVmConsolePasswordMsg();
+        msg.setUuid(vmUuid);
+        msg.setSession(session == null ? adminSession : session);
+        ApiSender sender = new ApiSender();
+        sender.setTimeout(timeout);
+        APIDeleteVmConsolePasswordEvent evt = sender.send(msg,APIDeleteVmConsolePasswordEvent.class);
+        return evt.getInventory();
+    }
+
     public List<String> getVmBootOrder(String vmUuid, SessionInventory session) throws ApiSenderException {
         APIGetVmBootOrderMsg msg = new APIGetVmBootOrderMsg();
         msg.setUuid(vmUuid);
